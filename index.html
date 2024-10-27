@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fcd1d1 0%, #fce1e4 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        .card {
+            background: white;
+            width: 300px;
+            height: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: relative;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: transform 1s;
+        }
+        .card:hover {
+            transform: perspective(1000px) rotateY(10deg);
+        }
+        .heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #ff6b6b;
+            transform: rotate(45deg);
+            animation: pulse 1.5s infinite;
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 40px;
+            height: 40px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart::before {
+            left: -20px;
+        }
+        .heart::after {
+            top: -20px;
+        }
+        .content {
+            padding: 30px;
+            text-align: center;
+        }
+        h1 {
+            color: #ff6b6b;
+            margin-top: 60px;
+            font-size: 24px;
+        }
+        p {
+            color: #666;
+            line-height: 1.5;
+            margin-top: 20px;
+        }
+        .balloons {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .balloon {
+            width: 30px;
+            height: 40px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 5px;
+            animation: float 3s infinite;
+        }
+        .balloon:nth-child(2) {
+            background: #ffd93d;
+            animation-delay: 0.2s;
+        }
+        .balloon:nth-child(3) {
+            background: #6c5ce7;
+            animation-delay: 0.4s;
+        }
+        @keyframes pulse {
+            0% { transform: rotate(45deg) scale(1); }
+            50% { transform: rotate(45deg) scale(1.1); }
+            100% { transform: rotate(45deg) scale(1); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="balloons">
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+        </div>
+        <div class="content">
+            <div class="heart" style="left: 130px; top: 20px;"></div>
+            <h1>สุขสันต์วันเกิด</h1>
+            <p>ขอให้วันพิเศษนี้<br>เต็มไปด้วยความสุข<br>คิดอะไรขอให้สมปราถนา<br>BE HEALTHY BE HAPPY<br>รักจากใจ ♥</p>
+            <p style="font-size: 14px; margin-top: 40px;">จาก: [เดย์]<br>ถึง: [แบม]</p>
+        </div>
+    </div>
+</body>
+</html>
