@@ -321,84 +321,70 @@
             flex-direction: column;
         }
 
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            padding: 20px;
-            max-width: 800px;
-            width: 90%;
+        .gallery-title {
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        .photo-frame {
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+
+        .photo-card {
             background: white;
-            padding: 10px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .photo-container {
             position: relative;
+            padding-top: 75%; /* 4:3 Aspect Ratio */
             overflow: hidden;
         }
 
-        .photo-frame:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .photo-frame img {
+        .photo-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 150px;
+            height: 100%;
             object-fit: cover;
-            border-radius: 5px;
             transition: transform 0.3s ease;
         }
 
-        .photo-frame:hover img {
+        .photo-card:hover img {
             transform: scale(1.05);
         }
 
         .photo-caption {
+            padding: 1rem;
             text-align: center;
-            margin-top: 10px;
-            color: #666;
-            font-size: 14px;
+            color: #333;
+            font-size: 0.9rem;
         }
 
-        .add-photo-button {
-            width: 100%;
-            height: 150px;
-            border: 2px dashed #ff6b8b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255, 107, 139, 0.1);
-            border-radius: 5px;
-        }
-
-        .add-photo-button:hover {
-            background: rgba(255, 107, 139, 0.2);
-        }
-
-        .add-photo-button i {
-            font-size: 24px;
-            color: #ff6b8b;
-            margin-bottom: 10px;
-        }
-
-        #file-input {
-            display: none;
-        }
-
-        .gallery-title {
-            color: white;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 24px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        @media (max-width: 768px) {
+            .photo-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+            
+            .gallery-title {
+                font-size: 1.5rem;
+            }
         }
 
         .navigation-dots {
@@ -478,12 +464,36 @@
         <button class="back-to-home" onclick="goHome()">← กลับหน้าแรก</button>
         <h2 class="gallery-title">อัลบั้มภาพความทรงจำ</h2>
         <div class="photo-gallery">
-            <div class="photo-frame">
-                <input type="file" id="file-input" accept="image/*" onchange="handleFileSelect(event)" multiple>
-                <div class="add-photo-button" onclick="document.getElementById('file-input').click()">
-                    <i>+</i>
-                    <span>เพิ่มรูปภาพ</span>
+            <!-- รูปที่ 1 -->
+            <div class="photo-card">
+                <div class="photo-container">
+                    <img src="/image/55835483-6DF8-4D1F-9BC7-52D5827B7F27.jpeg" alt="ความทรงจำที่ 1">
                 </div>
+                <div class="photo-caption">ความทรงจำที่แสนพิเศษ</div>
+            </div>
+
+            <!-- รูปที่ 2 -->
+            <div class="photo-card">
+                <div class="photo-container">
+                    <img src="image/8E99F7F8-F9F5-4AAC-8D6F-F46A10B9E6F2.jpeg" alt="ความทรงจำที่ 2">
+                </div>
+                <div class="photo-caption">ช่วงเวลาแห่งความสุข</div>
+            </div>
+
+            <!-- รูปที่ 3 -->
+            <div class="photo-card">
+                <div class="photo-container">
+                    <img src="image/DE5AE7D0-A175-496D-A779-C5C0375C1D15.jpeg" alt="ความทรงจำที่ 3">
+                </div>
+                <div class="photo-caption">วันที่น่าจดจำ</div>
+            </div>
+
+            <!-- รูปที่ 4 -->
+            <div class="photo-card">
+                <div class="photo-container">
+                    <img src="image/IMG_5294.JPG" alt="ความทรงจำที่ 4">
+                </div>
+                <div class="photo-caption">ความประทับใจ</div>
             </div>
         </div>
     </div>
@@ -543,27 +553,6 @@
             document.getElementById('card-page').style.transform = 'translateX(-100%)';
             document.getElementById('photos-page').style.transform = 'translateX(0)';
             updateNavDots(2);
-        }
-
-        function handleFileSelect(event) {
-            const files = event.target.files;
-            const gallery = document.querySelector('.photo-gallery');
-
-            for (let file of files) {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        const frame = document.createElement('div');
-                        frame.className = 'photo-frame';
-                        frame.innerHTML = `
-                            <img src="${e.target.result}" alt="Memory">
-                            <div class="photo-caption">ความทรงจำของเรา</div>
-                        `;
-                        gallery.insertBefore(frame, gallery.firstChild);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            }
         }
 
         function updateNavDots(activeIndex) {
