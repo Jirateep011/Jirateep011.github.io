@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/Jirateep011.github.io/', // เพิ่มบรรทัดนี้
   plugins: [
     vue(),
   ],
