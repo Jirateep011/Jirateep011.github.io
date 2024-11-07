@@ -27,3 +27,8 @@ npm run dev
 ```sh
 npm run build
 ```
+ssh-keygen -t ed25519 -C "6431501011@lamduan.mfu.ac.th"
+
+SHA256:5GRllZZYlNuz48itrhzHnBiPTNBHkyZjYOMphyX54AU 6431501011@lamduan.mfu.ac.th
+
+
